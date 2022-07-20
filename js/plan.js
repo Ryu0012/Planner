@@ -3,7 +3,8 @@ const taskText = document.querySelector(".task-todo input");
 const whenStart = document.querySelector(".task-when input");
 const whenFinish = document.querySelector(".task-when input:last-child");
 const taskDetails = document.querySelector(".task-details input");
-const taskSubmit = document.getElementById("create-task");
+const taskForm = document.getElementById("create-task");
+const main = document.querySelector("#main");
 
 const TODOS_KEY = "todos";
 toDos = [];
@@ -17,6 +18,42 @@ toDos = [];
 
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+}
+
+function paintToDo(newTodo) {
+  const planDiv = document.createElement("div");
+  planDiv.className = "plan";
+  planDiv.id = newTodo.id;
+
+  const clockDiv = document.createElement("div");
+  clockDiv.className = "plan-clock";
+  const clockStart = document.createElement("span");
+  clockStart.innerText = newTodo.start;
+  const clockWave = document.createElement("span");
+  clockWave.innerText = "~";
+  const clockFinish = document.createElement("span");
+  clockFinish.innerText = newTodo.finish;
+
+  const textDiv = document.createElement("div");
+  textDiv.className = "plan-text";
+  const content = document.createElement("span");
+  content.className = "plan-content";
+  content.innerText = newTodo.text;
+  const details = document.createElement("span");
+  details.className = "plan-details";
+  details.innerText = newTodo.detail;
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  clockDiv.append(clockStart);
+  clockDiv.append(clockFinish);
+  textDiv.appendChild(content);
+  textDiv.appendChild(details);
+  planDiv.appendChild(clockDiv);
+  planDiv.appendChild(textDiv);
+  planDiv.appendChild(checkbox);
+  main.appendChild(planDiv);
 }
 
 function handletodoSubmit(event) {
@@ -36,12 +73,22 @@ function handletodoSubmit(event) {
     text: newText,
     start: newStart,
     finish: newFinish,
-    details: newDetails,
+    detail: newDetails,
     id: Date.now(),
   };
 
   toDos.push(newTodoObj);
+  paintToDo(newTodoObj);
   saveToDos();
 }
 
-taskSubmit.addEventListener("submit", handletodoSubmit);
+taskForm.addEventListener("submit", handletodoSubmit);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos) {
+  const parsedToDos = JSON.parse(savedToDos);
+
+  toDos = parsedToDos;
+  parsedToDos.forEach(paintToDo);
+}
