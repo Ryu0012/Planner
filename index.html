@@ -48,10 +48,45 @@
         </div>
       </div>
 
-      <main id="main"></main>
+      <main id="main">
+        <!-- 
+        <div class="plan">
+          <div class="plan-clock"></div>
+          <div class="plan-text">
+            <span class="plan-content"></span>
+            <span class="plan-details"></span>
+          </div>
+          <input type="checkbox" />
+        </div> -->
+      </main>
+      <div class="plan-plus"><i class="fa-solid fa-plus"></i></div>
+      <form id="create-task">
+        <div class="task-title">
+          <span>작업 만들기</span>
+          <div>x</div>
+        </div>
+        <div class="task-todo">
+          <span>Todo</span>
+          <input type="text" placeholder="todo..." required />
+        </div>
+        <div class="task-when">
+          <span>When?</span>
+          <span>start</span>
+          <input type="time" />
+          <span>finish</span>
+          <input type="time" />
+        </div>
+        <div class="task-details">
+          <span>Details</span>
+          <input type="text" placeholder="details..." />
+        </div>
+        <input type="submit" value="submit" />
+      </form>
     </div>
 
     <script src="js/date.js"></script>
+    <script src="js/plan.js"></script>
+
     <script
       src="https://kit.fontawesome.com/615f75c040.js"
       crossorigin="anonymous"
