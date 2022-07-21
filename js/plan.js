@@ -20,6 +20,15 @@ function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function deleteToDo(event) {
+  // where click happen > path
+  // console.dir(event.target);
+  const div = event.target.parentElement;
+  div.remove();
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(div.id));
+  saveToDos();
+}
+
 function paintToDo(newTodo) {
   const planDiv = document.createElement("div");
   planDiv.className = "plan";
@@ -46,6 +55,11 @@ function paintToDo(newTodo) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
 
+  const Xspan = document.createElement("span");
+  Xspan.innerText = "x";
+
+  Xspan.addEventListener("click", deleteToDo);
+
   clockDiv.append(clockStart);
   clockDiv.append(clockFinish);
   textDiv.appendChild(content);
@@ -53,6 +67,7 @@ function paintToDo(newTodo) {
   planDiv.appendChild(clockDiv);
   planDiv.appendChild(textDiv);
   planDiv.appendChild(checkbox);
+  planDiv.appendChild(Xspan);
   main.appendChild(planDiv);
 }
 
