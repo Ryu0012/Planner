@@ -1,0 +1,28 @@
+#date {
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+}
+
+.date-details {
+  display: block;
+  text-align: center;
+  width: 43px;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.date-details span:first-child {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.date-details span:last-child {
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.today {
+  background-color: var(--main-color);
+}

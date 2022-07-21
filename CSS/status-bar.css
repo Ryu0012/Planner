@@ -1,0 +1,25 @@
+#status-bar {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 320px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 0.55px solid rgba(130, 130, 130, 0.09);
+  padding: 10px;
+}
+
+#status-bar span {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: var(--main-font-color);
+}
+
+.status-bar_icons {
+  font-size: 1.1em;
+  color: var(--main-color);
+}
+
+.status-bar_icons i {
+  margin-right: 5px;
+}

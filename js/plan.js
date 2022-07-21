@@ -56,11 +56,13 @@ function paintToDo(newTodo) {
   checkbox.type = "checkbox";
 
   const Xspan = document.createElement("span");
+  Xspan.className = "plan-x-btn";
   Xspan.innerText = "x";
 
   Xspan.addEventListener("click", deleteToDo);
 
   clockDiv.append(clockStart);
+  clockDiv.append(clockWave);
   clockDiv.append(clockFinish);
   textDiv.appendChild(content);
   textDiv.appendChild(details);

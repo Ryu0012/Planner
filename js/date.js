@@ -22,6 +22,8 @@ const dateSat = document.querySelector(
   ".date-details:nth-child(7) span:last-child"
 );
 
+const TODAYCLASSNAME = "today";
+
 function twoPadEnd(num) {
   return String(num).padStart(2, "0");
 }
@@ -32,9 +34,9 @@ function getYearMonth(date) {
   yearMonth.innerText = `${year}년 ${month}월`;
 }
 
-function getDaysDay(date) {
-  const days = date.getDate();
-  const day = date.getDay();
+function getDaysDay(days, day) {
+  // const days = date.getDate();
+  // const day = date.getDay();
 
   if (day === 0) {
     dateSun.innerText = days;
@@ -44,7 +46,7 @@ function getDaysDay(date) {
     dateThu.innerText = twoPadEnd(days + 4);
     dateFri.innerText = twoPadEnd(days + 5);
     dateSat.innerText = twoPadEnd(days + 6);
-  } else if (day == 1) {
+  } else if (day === 1) {
     dateSun.innerText = twoPadEnd(days - 1);
     dateMon.innerText = days;
     dateTue.innerText = twoPadEnd(days + 1);
@@ -52,7 +54,7 @@ function getDaysDay(date) {
     dateThu.innerText = twoPadEnd(days + 3);
     dateFri.innerText = twoPadEnd(days + 4);
     dateSat.innerText = twoPadEnd(days + 5);
-  } else if (day == 2) {
+  } else if (day === 2) {
     dateSun.innerText = twoPadEnd(days - 2);
     dateMon.innerText = twoPadEnd(days - 1);
     dateTue.innerText = days;
@@ -60,7 +62,7 @@ function getDaysDay(date) {
     dateThu.innerText = twoPadEnd(days + 2);
     dateFri.innerText = twoPadEnd(days + 3);
     dateSat.innerText = twoPadEnd(days + 4);
-  } else if (day == 3) {
+  } else if (day === 3) {
     dateSun.innerText = twoPadEnd(days - 3);
     dateMon.innerText = twoPadEnd(days - 2);
     dateTue.innerText = twoPadEnd(days - 1);
@@ -68,7 +70,7 @@ function getDaysDay(date) {
     dateThu.innerText = twoPadEnd(days + 1);
     dateFri.innerText = twoPadEnd(days + 2);
     dateSat.innerText = twoPadEnd(days + 3);
-  } else if (day == 4) {
+  } else if (day === 4) {
     dateSun.innerText = twoPadEnd(days - 4);
     dateMon.innerText = twoPadEnd(days - 3);
     dateTue.innerText = twoPadEnd(days - 2);
@@ -76,7 +78,7 @@ function getDaysDay(date) {
     dateThu.innerText = days;
     dateFri.innerText = twoPadEnd(days + 1);
     dateSat.innerText = twoPadEnd(days + 2);
-  } else if (day == 5) {
+  } else if (day === 5) {
     dateSun.innerText = twoPadEnd(days - 5);
     dateMon.innerText = twoPadEnd(days - 4);
     dateTue.innerText = twoPadEnd(days - 3);
@@ -84,7 +86,7 @@ function getDaysDay(date) {
     dateThu.innerText = twoPadEnd(days - 1);
     dateFri.innerText = days;
     dateSat.innerText = twoPadEnd(days + 1);
-  } else if (day == 6) {
+  } else if (day === 6) {
     dateSun.innerText = twoPadEnd(days - 6);
     dateMon.innerText = twoPadEnd(days - 5);
     dateTue.innerText = twoPadEnd(days - 4);
@@ -94,10 +96,48 @@ function getDaysDay(date) {
     dateSat.innerText = days;
   }
 }
+
+function getTodayColor(day) {
+  const sun = document.querySelector(".date-details:nth-child(1)");
+  const mon = document.querySelector(".date-details:nth-child(2)");
+  const tue = document.querySelector(".date-details:nth-child(3)");
+  const wed = document.querySelector(".date-details:nth-child(4)");
+  const thu = document.querySelector(".date-details:nth-child(5)");
+  const fri = document.querySelector(".date-details:nth-child(6)");
+  const sat = document.querySelector(".date-details:nth-child(7)");
+
+  if (day === 0) {
+    sun.classList.add(TODAYCLASSNAME);
+    sat.classList.remove(TODAYCLASSNAME);
+  } else if (day === 1) {
+    mon.classList.add(TODAYCLASSNAME);
+    sun.classList.remove(TODAYCLASSNAME);
+  } else if (day === 2) {
+    tue.classList.add(TODAYCLASSNAME);
+    mon.classList.remove(TODAYCLASSNAME);
+  } else if (day === 3) {
+    wed.classList.add(TODAYCLASSNAME);
+    tue.classList.remove(TODAYCLASSNAME);
+  } else if (day === 4) {
+    thu.classList.add(TODAYCLASSNAME);
+    wed.classList.remove(TODAYCLASSNAME);
+  } else if (day === 5) {
+    fri.parentElement.classList.add(TODAYCLASSNAME);
+    thu.parentElement.classList.remove(TODAYCLASSNAME);
+  } else if (day === 6) {
+    sat.classList.add(TODAYCLASSNAME);
+    fri.classList.remove(TODAYCLASSNAME);
+  }
+}
+
 function getClock() {
   const date = new Date();
+  const days = date.getDate();
+  const day = date.getDay();
+
   getYearMonth(date);
-  getDaysDay(date);
+  getDaysDay(days, day);
+  getTodayColor(day);
 }
 
 getClock();
